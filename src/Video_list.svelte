@@ -20,6 +20,7 @@
     border-radius: 10px;
     position: relative;
     overflow: hidden;
+    margin-top:10px;
 }
 
 .cardvideo > .video_display{
