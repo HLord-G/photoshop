@@ -23,7 +23,7 @@
 }
 
 .cardvideo > .video_display{
-    background-color: gray;
+    background-color: black;
     height:100%;
     width:100%;
 }
