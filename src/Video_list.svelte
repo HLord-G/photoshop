@@ -1,15 +1,42 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
     export let namse = "";
     export let img = "";
+    export let videoId = "";
+    export let heart = "";
+    let dataStyle = ""
+    
+    if (heart) {
+        dataStyle = "color:#c02d2d;"
+    }else{
+        dataStyle = ""
+    }
+
     let videoData = {
         "name": namse,
         "img":img 
     }
+
+    const dispatch = createEventDispatcher();
+
+    function handleViewVideo() {
+        dispatch('viewVideo');
+    }
+
+    function handleheartted() {
+        dispatch('heartted');
+    }
+
+    function handleModel() {
+        dispatch('model');
+    }
+
+
 </script>
 
-
-<div class="cardvideo">
-     <div class="video_display" style="background-image: url({videoData["img"]});"> {videoData["name"]}
+<!-- on:click -->
+<div class="cardvideo" id="videolist{videoId}">
+     <div class="video_display" style="background-image: url({videoData["img"]});" on:click={handleModel}>  
         
         <div class="video_content">
             <h2>Lorem, ipsum. {videoData["name"]}</h2>
@@ -18,14 +45,33 @@
      </div>
      
      <div class="sidecontent">
-        <div class="divider">d</div>
-        <div class="divider">d</div>
+        <div class="divider">
+            <button on:click={handleModel}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-play-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445"/>
+                </svg>
+            </button> 
+        <button on:click={handleheartted} class="" style="{dataStyle}" id="heartbtn{videoId}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+              </svg>
+        </button></div>
+        <div class="divider">
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-circle-square" viewBox="0 0 16 16">
+                    <path d="M0 6a6 6 0 1 1 12 0A6 6 0 0 1 0 6"/>
+                    <path d="M12.93 5h1.57a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1.57a7 7 0 0 1-1-.22v1.79A1.5 1.5 0 0 0 5.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 4h-1.79q.145.486.22 1"/>
+                  </svg>
+            </button>
+        </div>
      </div>
-     
 </div>
 
 
 <style>
+
+ 
 
 .cardvideo{
     width:240px;
@@ -46,12 +92,11 @@
 
 .cardvideo:hover{
     box-shadow: 0px 8px 12px 6px rgba(0,0,0,0.47);
--webkit-box-shadow: 0px 8px 12px 6px rgba(0,0,0,0.47);
--moz-box-shadow: 0px 8px 12px 6px rgba(0,0,0,0.47);
+    -webkit-box-shadow: 0px 8px 12px 6px rgba(0,0,0,0.47);
+    -moz-box-shadow: 0px 8px 12px 6px rgba(0,0,0,0.47);
     }
 
 .cardvideo > .video_display{
-    background-color: black;
     height:100%;
     width:100%;
     transition: .4s;
@@ -114,6 +159,30 @@
     height:100%;
     width:100%;
     flex: 1;
+    padding:2px;
+}
+
+.cardvideo > .sidecontent > .divider > button{
+    padding:0;
+    margin:0;
+    background-color: transparent;
+    border: none;
+    outline:0;
+    color:ghostwhite;
+    margin-top:10px;
+    cursor: pointer;
+    transition: .3s;
+
+    width:100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+
+.cardvideo > .sidecontent > .divider > button:hover{
+    color: rgb(99, 184, 241);
 }
 
 .cardvideo > .sidecontent >  .divider:nth-child(1){
@@ -129,5 +198,8 @@
     justify-content: flex-end;
     align-items: flex-end;
     flex-flow: column;
+    /* border: 1px solid #c02d2d; */
 }
+
+ 
 </style>
